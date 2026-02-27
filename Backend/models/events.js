@@ -32,7 +32,7 @@ const eventSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: function(value) {
-                return value > this.eventStartDate;
+                return value >= this.eventStartDate;
             },
             message: "End date must be after start date."
         }
