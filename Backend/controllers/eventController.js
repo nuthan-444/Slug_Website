@@ -21,7 +21,11 @@ const getAllEventsController = async (req, res) => {
 
 
 const addEventController = async (req, res) => {
-    const { eventImage, eventTitle, eventDescription, eventStartDate, eventEndDate, eventParticipantsList, eventMaxParticipants, eventLocation, isEventActive, eventCreatedBy, eventMode } = req.body;
+    const {eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode } = req.body;
+    const eventImage = req.file;
+
+    
+    console.log(eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode)
 
     if (!eventImage || !eventTitle || !eventDescription || !eventStartDate || !eventEndDate || !eventMaxParticipants || !eventLocation || !eventCreatedBy) {
         return res.status(400).json({ status: false, message: "All fields are required." });
@@ -38,7 +42,7 @@ const addEventController = async (req, res) => {
         }
 
 
-        const addEvent = await EVENT.create({ eventImage, eventTitle, eventDescription, eventStartDate, eventEndDate, eventParticipantsList, eventMaxParticipants, eventLocation, isEventActive, eventCreatedBy, eventMode });
+        const addEvent = await EVENT.create({ eventImage, eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode });
 
         if (!addEvent) {
             return res.status(400).json({ status: false, message: "Failed to add." });
@@ -48,7 +52,7 @@ const addEventController = async (req, res) => {
 
 
     } catch (error) {
-        
+        console.log(error)
         return res.status(500).json({ status: false, message: "Server error" });
     }
 }
