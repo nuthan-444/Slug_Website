@@ -1,5 +1,7 @@
 const USER = require("../models/user");
 const EVENT = require("../models/events");
+const cloudinary = require("../config/cloudinary");
+const fs = require("fs");
 
 
 // for user to get all events
@@ -15,16 +17,17 @@ const getAllEventsController = async (req, res) => {
         return res.status(200).json({ status: true, message: "Events fetched successfully", allEvents: getAllEvents });
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
 
 const addEventController = async (req, res) => {
-    const {eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode } = req.body;
+    const { eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode } = req.body;
     const eventImage = req.file;
 
-    
+
     console.log(eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode)
 
     if (!eventImage || !eventTitle || !eventDescription || !eventStartDate || !eventEndDate || !eventMaxParticipants || !eventLocation || !eventCreatedBy) {
@@ -41,8 +44,17 @@ const addEventController = async (req, res) => {
             return res.status(400).json({ status: false, message: "You are not admin." });
         }
 
+        // Upload to Cloudinary
+        const uploadResult = await cloudinary.uploader.upload(eventImage.path, {
+            folder: "events",
+        });
 
-        const addEvent = await EVENT.create({ eventImage, eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode });
+        if (!uploadResult) { return res.status(400).json({ status: false, message: "failed to upload image" }) }
+
+        // Delete local file after upload
+        fs.unlinkSync(eventImage.path);
+
+        const addEvent = await EVENT.create({ eventImage: uploadResult.secure_url, eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode });
 
         if (!addEvent) {
             return res.status(400).json({ status: false, message: "Failed to add." });
@@ -73,26 +85,26 @@ const updateEventController = async (req, res) => {
             return res.status(400).json({ status: false, message: "You are not admin." });
         }
 
-        const updatedEvent = await EVENT.findByIdAndUpdate(updatedData._id,updatedData,{returnDocument: "after",runValidators: true}) ;
-        if(!updatedEvent) {
-            return res.status(400).json({status:false,message:"Failed to Update."});
+        const updatedEvent = await EVENT.findByIdAndUpdate(updatedData._id, updatedData, { returnDocument: "after", runValidators: true });
+        if (!updatedEvent) {
+            return res.status(400).json({ status: false, message: "Failed to Update." });
         }
-        return res.status(200).json({status:true,message:"Successfully Updated",updatedEvent:updatedEvent});
-    } catch(error) {
-        return res.status(500).json({status:false,message:"Server error"});
+        return res.status(200).json({ status: true, message: "Successfully Updated", updatedEvent: updatedEvent });
+    } catch (error) {
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
 
-const deleteEventController = async(req,res) => {
+const deleteEventController = async (req, res) => {
     const event_id = req.params._id;
     const remover_id = req.user._id;
 
-    if(!event_id) {
+    if (!event_id) {
         return res.status(400).json({ status: false, message: "Didn't receive Event id." });
     }
 
-    try{
+    try {
         const isPublisherAdmin = await USER.findById(remover_id);
         if (!isPublisherAdmin) {
             return res.status(404).json({ status: false, message: "Account Not Found." });
@@ -103,13 +115,13 @@ const deleteEventController = async(req,res) => {
 
         const deleteEvent = await EVENT.findByIdAndDelete(event_id);
 
-        if(!deleteEvent) {
-            return res.status(404).json({status:false,message:"Event Not Found."});
+        if (!deleteEvent) {
+            return res.status(404).json({ status: false, message: "Event Not Found." });
         }
 
-        return res.json({status:true,message:"Successfully deleted."}).status(204);
-    } catch(error) {
-        return res.status(500).json({status:false,message:"Server error"});
+        return res.json({ status: true, message: "Successfully deleted." }).status(204);
+    } catch (error) {
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
