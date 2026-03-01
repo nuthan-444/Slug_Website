@@ -23,6 +23,55 @@ const getAllEventsController = async (req, res) => {
 }
 
 
+
+const registrationForEventController = async(req,res) => {
+    const event_id = req.params.event_id; 
+    const user_id = req.user._id;
+    console.log(event_id,user_id)
+    if(!user_id){
+        return res.status(400),json({status:false,message:"All fields are require"});
+    }
+
+    try{
+        const userData = await USER.findById(user_id);
+        if(!userData) {
+            return res.status(404).json({status:false,message:"Account not found"});
+        }
+
+        const updateRegration = await EVENT.findByIdAndUpdate(event_id,{ $addToSet: { eventParticipantsList: user_id } },{returnDocument: "after", runValidators: true });
+        if(!updateRegration) {
+            return res.status(400).json({status:false,message:"Failed to Register."});
+        }
+
+        return res.status(201).json({status:true,message:"Register Successfully."});
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({status:false,message:"Server error."});
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// only for admin adding events
 const addEventController = async (req, res) => {
     const { eventTitle, eventDescription, eventStartDate, eventEndDate, eventMaxParticipants, eventLocation, eventCreatedBy, eventMode } = req.body;
     const eventImage = req.file;
@@ -71,7 +120,7 @@ const addEventController = async (req, res) => {
 
 
 
-
+// only for admin updating events
 const updateEventController = async (req, res) => {
 
     const updatedData = req.body;
@@ -96,6 +145,9 @@ const updateEventController = async (req, res) => {
 }
 
 
+
+
+// only for admin deleting events
 const deleteEventController = async (req, res) => {
     const event_id = req.params._id;
     const remover_id = req.user._id;
@@ -129,6 +181,7 @@ const deleteEventController = async (req, res) => {
 
 module.exports = {
     getAllEventsController,
+    registrationForEventController,
     addEventController,
     updateEventController,
     deleteEventController
