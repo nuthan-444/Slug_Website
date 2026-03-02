@@ -1,6 +1,7 @@
 const USER = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../util/JWT.Token');
+const { sendVerificationCode } = require('../middleware/email');
 
 
 
@@ -57,7 +58,6 @@ const loginController = async(req,res) => {
 
 
 
-
 // creating user
 const creatingUserController = async(req,res) => {
     let {name,srn,email,password} = req.body;
@@ -77,20 +77,23 @@ const creatingUserController = async(req,res) => {
             return res.status(400).json({status:false,message:"User already exist with this SRN."});
         }
     
-
+        
         const salt = 10;
         password = await bcrypt.hash(password,salt);
 
-        const createUser = await USER.create({name,srn,email,password});
+        const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
 
-        return res.status(201).json({status:true,message:"Account created successfully",token:generateToken(createUser._id),userData:createUser});
+        const createUser = await USER.create({name,srn,email,password,verificationCode});
+        sendVerificationCode(createUser.email,verificationCode);
 
+        return res.status(201).json({status:true,message:"Account created successfully"});
 
     } catch(error){
         console.log(error);
         return res.status(500).json({status:false,message:"Server error"});
     }
 }
+
 
 
 // updating user
@@ -126,7 +129,6 @@ const updateUserController = async(req,res) => {
 
 
 
-
 const deleteUserController = async(req,res) => {
     const id = req.params.id;
     if(!id) {
@@ -148,6 +150,35 @@ const deleteUserController = async(req,res) => {
 }
 
 
+
+
+const verifyController = async(req,res) => {
+    const {opt} = req.body;
+    if(!opt) {
+        return res.status(400).json({status:false,message:"opt is empty."});
+    }
+
+    try{
+        const user = await USER.findOne({verificationCode:opt}).select("+isVerified");
+
+        if(!user){
+            await USER.findOneAndDelete({email});
+            return res.status(400).json({status:false,message:"Wrong OPT, Register again"}); 
+        }
+
+        user.isVerified=true;
+        user.verificationCode=undefined;
+        return res.status(201).json({status:true,message:"Account Verified successfully",token:generateToken(user._id),userData:user});
+    } catch(error) {
+        console.log(error);
+        return res.status(500).json({status:false,message:"Server error"});
+    }
+}
+
+
+
+
+
 module.exports = {
     getUserDataController,
 
@@ -157,5 +188,10 @@ module.exports = {
 
     updateUserController, 
 
-    deleteUserController
+    deleteUserController,
+
+    verifyController
 }
+
+
+
