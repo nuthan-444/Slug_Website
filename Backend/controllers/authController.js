@@ -1,7 +1,7 @@
 const USER = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../util/JWT.Token');
-const { sendVerificationCode } = require('../middleware/email');
+const { sendVerificationCode, welcomeEmailMessage } = require('../middleware/email');
 
 
 
@@ -153,13 +153,17 @@ const deleteUserController = async(req,res) => {
 
 
 const verifyController = async(req,res) => {
-    const {opt} = req.body;
-    if(!opt) {
-        return res.status(400).json({status:false,message:"opt is empty."});
+    const {email,otpCode} = req.body;
+    
+    
+    try{
+        
+    if(!otpCode) {
+        await USER.findOneAndDelete({email});
+        return res.status(400).json({status:false,message:"opt is empty., Register again"}); 
     }
 
-    try{
-        const user = await USER.findOne({verificationCode:opt}).select("+isVerified");
+        const user = await USER.findOne({verificationCode:otpCode}).select("+isVerified");
 
         if(!user){
             await USER.findOneAndDelete({email});
@@ -168,6 +172,7 @@ const verifyController = async(req,res) => {
 
         user.isVerified=true;
         user.verificationCode=undefined;
+        welcomeEmailMessage(email,user.name);
         return res.status(201).json({status:true,message:"Account Verified successfully",token:generateToken(user._id),userData:user});
     } catch(error) {
         console.log(error);
