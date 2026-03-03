@@ -31,6 +31,15 @@ const userSchema = new mongoose.Schema({
     role:{
         type:String,
         default:"user",
+    },
+    verificationCode:{
+        type:String,
+        select:false
+    },
+    isVerified:{
+        type:Boolean,
+        default:false,
+        select:false
     }
 },{
     timestamps:true,
