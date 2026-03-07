@@ -147,7 +147,6 @@ const addEventController = async (req, res) => {
 const updateEventController = async (req, res) => {
 
     const updatedData = req.body;
-
     try {
         const isPublisherAdmin = await USER.findById(updatedData.eventCreatedBy);
         if (!isPublisherAdmin) {
