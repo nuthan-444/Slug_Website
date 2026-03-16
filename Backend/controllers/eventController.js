@@ -19,7 +19,7 @@ const getAllEventsController = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ status: false, message: "Server error" });
+        return res.status(500).json({ status: false, message: "Server error",error:error });
     }
 }
 
@@ -51,7 +51,7 @@ const registrationForEventController = async (req, res) => {
         return res.status(200).json({ status: true, message: "Register Successfully." });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ status: false, message: "Server error." });
+        return res.status(500).json({ status: false, message: "Server error.",error:error });
     }
 }
 
@@ -88,7 +88,7 @@ const registrationCancelForEventController = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ status: false, message: "Server error." });
+        return res.status(500).json({ status: false, message: "Server error.",error:error });
     }
 };
 
@@ -137,7 +137,7 @@ const addEventController = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ status: false, message: "Server error" });
+        return res.status(500).json({ status: false, message: "Server error",error:error });
     }
 }
 
@@ -145,7 +145,6 @@ const addEventController = async (req, res) => {
 
 // only for admin updating events
 const updateEventController = async (req, res) => {
-
     const updatedData = req.body;
     try {
         const isPublisherAdmin = await USER.findById(updatedData.eventCreatedBy);
@@ -162,7 +161,7 @@ const updateEventController = async (req, res) => {
         }
         return res.status(200).json({ status: true, message: "Successfully Updated", updatedEvent: updatedEvent });
     } catch (error) {
-        return res.status(500).json({ status: false, message: "Server error" });
+        return res.status(500).json({ status: false, message: "Server error",error:error });
     }
 }
 
@@ -195,7 +194,7 @@ const deleteEventController = async (req, res) => {
 
         return res.json({ status: true, message: "Successfully deleted." }).status(204);
     } catch (error) {
-        return res.status(500).json({ status: false, message: "Server error" });
+        return res.status(500).json({ status: false, message: "Server error",error:error });
     }
 }
 
@@ -225,13 +224,6 @@ const getAllUserDataWhoAreRegisteredForParticularEventController = async (req, r
             return res.status(400).json({ status: false, message: "You are not admin." });
         }
 
-        // const getAllRegisteredUserId = await EVENT.findById(eventID).select("eventParticipantsList");
-
-        // if(!getAllRegisteredUserId) {
-        //     return res.status(404).json({ status: false, message: "Event Not Found." });
-        // }
-
-        // const getAllUserData = await USER.findById(getAllRegisteredUserId).select("name srn email");
         const eventParticipantsData = await EVENT.findById(eventID).select("eventParticipantsList").populate("eventParticipantsList", "name email srn");
 
         if (!eventParticipantsData) {
@@ -241,7 +233,7 @@ const getAllUserDataWhoAreRegisteredForParticularEventController = async (req, r
         return res.status(200).json({ status: true, message: "Got the Data", eventParticipantsData: eventParticipantsData });
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ status: false, message: "Server error" });
+        return res.status(500).json({ status: false, message: "Server error",error:error });
     }
 }
 
