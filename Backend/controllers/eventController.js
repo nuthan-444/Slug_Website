@@ -238,25 +238,6 @@ const getAllUserDataWhoAreRegisteredForParticularEventController = async (req, r
 }
 
 
-// json data 
-
-
-// {
-//     "status": true,
-//     "message": "Got the Data",
-//     "eventParticipantsData": {
-//         "_id": "69b4b1b97c6a7606d259a7a8",
-//         "eventParticipantsList": [
-//             {
-//                 "_id": "6999b6d82482f672aabd9a7c",
-//                 "name": "Nuthan prasad",
-//                 "srn": "24SUUBECS1389",
-//                 "email": "nuthan@gmail.com"
-//             }
-//         ]
-//     }
-// }
-
 
 module.exports = {
     getAllEventsController,
