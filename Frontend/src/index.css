@@ -1,0 +1,40 @@
+:root{
+
+  /* Fonts */
+  --main-font: Montserrat;
+  --secondary-font : Outfit
+
+}
+
+
+* {
+    padding: 0%;
+    margin: 0%;
+}
+
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+
+}
+
+.dot-div {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: all 0s ease;
+}
+
+@media only screen and (max-width:1000px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .dot-div {
+        display: none;
+    }
+}
