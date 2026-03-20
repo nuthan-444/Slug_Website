@@ -246,5 +246,5 @@ module.exports = {
     addEventController,
     updateEventController,
     deleteEventController,
-    getAllUserDataWhoAreRegisteredForParticularEventController
+    getAllUserDataWhoAreRegisteredForParticularEventController,
 }
