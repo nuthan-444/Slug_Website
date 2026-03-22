@@ -250,6 +250,7 @@ const Event_Registration_Email_Template = `
             <p><strong>Event:</strong> {eventName}</p>
             <p><strong>Date:</strong> {eventDate}</p>
             <p><strong>Location:</strong> {eventLocation}</p>
+            <p><strong>Whatsapp Group:</strong> <a>{eventWhatsappGroup}</a></p>
         </div>
 
         <p>We’re excited to have you join us. Make sure to mark your calendar!</p>
