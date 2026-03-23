@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
 
-    eventImage:{
-        type:String,
+    eventImage: {
+        type: String,
     },
 
     eventTitle: {
@@ -14,19 +14,37 @@ const eventSchema = new mongoose.Schema({
         maxlength: 100,
     },
 
-    eventDescription: {
+    eventShortDescription: {
         type: String,
         required: true,
         trim: true,
-        minlength: 10,
+        maxlength: 300
     },
 
-    eventCategory:{
-        type:String,
+    eventDescription: {
+        type: String,
+        required: true,
+        minlength: 10,
+    },
+    eventWhatsappGroup: {
+        type: String,
+        default: "https://chat.whatsapp.com/KedhgZ9lnFJAyw9DWF4llO",
+        Select: false,
+    },
+    eventCategory: {
+        type: String,
         required: true,
         trim: true,
         minlength: 3,
-        enum:["Hackthon","Session","Work shop"]
+        enum: ["Hackthon", "Session", "Work shop"]
+    },
+    eventRegStartDate: {
+        type: Date,
+        required: true
+    },
+    eventRegEndDate: {
+        type: Date,
+        required: true
     },
     eventStartDate: {
         type: Date,
@@ -38,11 +56,6 @@ const eventSchema = new mongoose.Schema({
         required: true,
 
     },
-
-    eventParticipantsList: [{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-    }],
 
     eventMaxParticipants: {
         type: Number,
@@ -61,10 +74,10 @@ const eventSchema = new mongoose.Schema({
         required: true,
     },
 
-    eventMode:{
-        type:String,
-        enum:["Online","Offline"],
-        default:"Offline"
+    eventMode: {
+        type: String,
+        enum: ["Online", "Offline"],
+        default: "Offline"
     }
 
 }, {
