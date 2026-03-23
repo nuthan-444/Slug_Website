@@ -1,10 +1,15 @@
 const express = require("express");
-const { getAllEventsController, registrationForEventController, registrationCancelForEventController, addEventController, updateEventController, deleteEventController
+const {getDetailedEventsController, getAllEventsController, registrationForEventController, registrationCancelForEventController, addEventController, updateEventController, deleteEventController
     ,getAllUserDataWhoAreRegisteredForParticularEventController
 } = require("../controllers/eventController");
 const { verifyToken } = require("../util/JWT.Token"); 
 const upload = require("../middleware/multer")
 const router = express.Router();
+
+
+
+// Getting Single Event details by id
+router.get("/getEvent/:_id",verifyToken,getDetailedEventsController)
 
 
 // for user and admin [Getting all events]
