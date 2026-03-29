@@ -14,6 +14,7 @@ import Admin from './pages/Admin'
 import EventRegisterationInfo from './components/EventRegisterationInfo'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import DetailedEventCard from './components/DetailedEventCard'
 
 const App = () => {
 
@@ -42,6 +43,7 @@ const App = () => {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/events' element={<Events />} />
+              <Route path='/events/:eventID' element={<DetailedEventCard />} />
               <Route path='/admin/eventRegisterationInfo' element={<EventRegisterationInfo />} />
               <Route path='/admin/eventform' element={<EventForm />} />
               <Route path="/admin" element={<Admin />} />
