@@ -1,0 +1,86 @@
+.registration-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.info-table-div {
+    margin-left: 200px;
+    /* background-color: red; */
+    width: 1000px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: center;
+}
+
+.get-participants-btn {
+    padding: 0.6rem;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    font-family: var(--secondary-font);
+    transition: all 0.3s;
+}
+
+.get-participants-btn:hover {
+    border: 0.5px solid black;
+    background-color: white;
+    color: black;
+}
+
+.event-id {
+    margin-left: 10px;
+}   
+
+
+.parti-title {
+    text-align: center;
+    font-size: 20px;
+    font-family: var(--secondary-font);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.download-data {
+    margin-left: 10px;
+    background: #000000;
+    color: white;
+    border: none;
+    padding: 0.6rem;
+    font-family: var(--secondary-font);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.download-data:hover {
+    border: 0.5px solid black;
+    background-color: white;
+    color: black;
+}
+
+@media only screen and (max-width:600px) {
+    .registration-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-table-div {
+        margin-left: 0px;
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    .parti-list-data {
+        overflow-x: scroll;
+    }
+}

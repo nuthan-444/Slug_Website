@@ -1,0 +1,115 @@
+.event-from-outer {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-form-container {
+  background: #ffffff;
+  color: #000000;
+  padding: 50px 20px;
+  margin-left: 300px;
+  width: 800px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.event-form {
+  max-width: 500px;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-form input,
+.event-form textarea,
+.event-form select {
+  padding: 12px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 5px;
+}
+
+.event-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+.drop-zone {
+  color: black;
+  border: 2px dashed #000000;
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.drop-zone:hover {
+  background: #afafaf;
+}
+
+.drop-zone img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.drop-zone label {
+  display: block;
+  margin-top: 10px;
+  color: #000000;
+  cursor: pointer;
+}
+
+.event-form button {
+  padding: 12px;
+  background: #000000;
+  border: none;
+  color: #fffcfc;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.event-form button:hover {
+  background: #ffffff;
+  color: black;
+  border: 1px inset black;
+}
+
+@media only screen and (max-width:600px) {
+  .event-from-outer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event-form-container {
+    background: #ffffff;
+    color: #000000;
+    padding: 20px 20px;
+    padding-bottom: 80px;
+    margin-left: 00px;
+    width: 370px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .event-form {
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,179 @@
+#about-section {
+  margin-top: 100px;
+  /* background-color: #c4c2c2; */
+  height: fit-content;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(5, 5, 5);
+
+}
+
+.slug-fullform-text {
+  font-size: 54px;
+  font-weight: 500;
+  margin-left: 0px;
+  font-family: var(--main-font);
+}
+
+.about-slug {
+  font-family: var(--secondary-font);
+  font-weight: 300;
+  padding: 00px 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 100px;
+  height: 800px;
+}
+
+.inside-about-slug {
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inside-about-slug p {
+  font-size: 20px;
+}
+
+.slug-img-div {
+  margin-left: 200px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.slug-img-div img {
+  width: 600px;
+  height: 500px;
+}
+
+.about-GNU {
+  font-family: var(--secondary-font);
+  font-weight: 300;
+  padding: 00px 100px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 100px;
+  height: 800px;
+  /* border: 1px solid red; */
+}
+
+
+.inside-about-GNU {
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inside-about-GNU p {
+  font-size: 20px;
+}
+
+.GNU-img-div {
+  margin-left: 200px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.GNU-img-div img {
+  width: 600px;
+  height: 900px;
+}
+
+
+
+@media only screen and (max-width:600px) {
+  #about-section {
+    margin-top: 100px;
+    /* background-color: #c4c2c2; */
+    height: fit-content;
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 2px solid rgb(5, 5, 5);
+
+  }
+
+  .slug-fullform-text {
+    font-size: 25px;
+    font-weight: 500;
+    margin-left: 0px;
+    font-family: var(--main-font);
+  }
+
+  .about-slug {
+    font-family: var(--secondary-font);
+    font-weight: 300;
+    padding: 00px 00px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+    height: 800px;
+  }
+
+  .inside-about-slug {
+    text-align: center;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inside-about-slug p {
+    font-size: 20px;
+  }
+
+  .slug-img-div {
+    margin-top: 50px;
+    margin-left: 0px;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .slug-img-div img {
+    width: 400px;
+    height: 350px;
+  }
+
+  .about-GNU {
+    font-family: var(--secondary-font);
+    font-weight: 300;
+    padding: 00px 00px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 00px;
+    height: 800px;
+  }
+
+
+  .inside-about-GNU {
+    text-align: center;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inside-about-GNU p {
+    font-size: 20px;
+  }
+
+  .GNU-img-div {
+    margin-top: 50px;
+    margin-left: 0px;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .GNU-img-div img {
+    width: 400px;
+    height: 600px;
+  }
+
+}
