@@ -226,10 +226,10 @@ const deleteEventController = async (req, res) => {
 
 
 const getAllUserDataWhoAreRegisteredForParticularEventController = async (req, res) => {
-    const eventID = req.params._id;
+    const eventId = req.params._id;
     const getterID = req.user._id;
-
-    if (!eventID || !getterID) {
+    
+    if (!eventId || !getterID) {
         return res.status(400).json({ status: false, message: "event id is required" });
     }
 
@@ -243,7 +243,7 @@ const getAllUserDataWhoAreRegisteredForParticularEventController = async (req, r
             return res.status(400).json({ status: false, message: "You are not admin." });
         }
 
-        const eventParticipantsData = await EVENTREGINFO.findById(eventID).populate("registrationList", "name email srn");
+        const eventParticipantsData = await EVENTREGINFO.findOne({eventId:eventId}).populate("registrationList", "name email srn");
 
         if (!eventParticipantsData) {
             return res.status(404).json({ status: false, message: "Event Not Found" });
