@@ -61,6 +61,7 @@
 #slug-logo-hero-section {
     width: 70px;
     height: 60px;
+    filter: saturate(0);
 }
 
 .logo-div-hero-section #slug-text-hero-section {
