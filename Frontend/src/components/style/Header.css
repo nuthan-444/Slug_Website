@@ -26,6 +26,7 @@ header {
 .logo-div #slug-logo {
     width: 50px;
     height: 40px;
+    filter: saturate(0);
 }
 
 .logo-div #slug-text {
