@@ -7,51 +7,54 @@ const { sendVerificationCode, welcomeEmailMessage } = require('../middleware/ema
 
 
 // getting user controllers
-const getUserDataController = async(req,res) => {
+const getUserDataController = async (req, res) => {
     const _id = req.params._id;
-    if(!_id) {
-        return res.status(400).json({status:false,message:"id is required."});
+    if (!_id) {
+        return res.status(400).json({ status: false, message: "Id is required." });
     }
+    if (req.user.id !== req.params.id) {
+        return res.status(403).json({ status: false, message: "Insufficient permissions" });
 
-    try{
+    }
+    try {
         const userData = await USER.findById(_id);
-        if(!userData){
-            return res.status(404).json({status:false,message:"User Not Found"});
+        if (!userData) {
+            return res.status(404).json({ status: false, message: "User Not Found" });
         }
 
-        return res.status(200).json({status:true,message:"user found",userData:userData});
-    }catch(error) {
-        return res.status(500).json({status:false,message:"Server error"});
+        return res.status(200).json({ status: true, message: "User found", userData: UserData });
+    } catch (error) {
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
 
 
 // user login controller
-const loginController = async(req,res) => {
-    const {email,password} = req.body;
-    if(!email || !password) {
-        return res.status(400).json({status:false,message:"All fields are required"});
+const loginController = async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ status: false, message: "All fields are required" });
     }
 
-    try{
-        const userData = await USER.findOne({email}).select("+password");
-        if(!userData){
-            return res.status(404).json({status:false,message:"No user found with this email"});
-        }
-        
-        const isPasswordCorrect = await bcrypt.compare(password,userData.password);
-        
-        if(isPasswordCorrect){
-            return res.status(200).json({status:true,message:"Logged in successfully",token:generateToken(userData._id),userData:userData});
+    try {
+        const userData = await USER.findOne({ email }).select("+password");
+        if (!userData) {
+            return res.status(404).json({ status: false, message: "Invalid credentials" });
         }
 
-        return res.status(400).json({status:false,message:"Wrong Password"});
+        const isPasswordCorrect = await bcrypt.compare(password, userData.password);
 
-    } catch(error) {
+        if (isPasswordCorrect) {
+            const {password,...safeUser} = userData.toObject();
+            return res.status(200).json({ status: true, message: "Logged in successfully", token: generateToken(userData._id), userData: safeUser });
+        }
+
+        return res.status(401).json({ status: false, message: "Invalid credentials" });
+
+    } catch (error) {
         console.log(error)
-        return res.status(500).json({status:false,message:"Server error"});
-
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 
 }
@@ -59,124 +62,124 @@ const loginController = async(req,res) => {
 
 
 // creating user
-const creatingUserController = async(req,res) => {
-    let {name,srn,email,password} = req.body;
-    if(!name || !srn || !email || !password){
-        return res.status(400).json({status:false,message:"All fields are required"});
+const creatingUserController = async (req, res) => {
+    let { name, srn, email, password } = req.body;
+    if (!name || !srn || !email || !password) {
+        return res.status(400).json({ status: false, message: "All fields are required" });
     }
 
     try {
-        const isAlreadyUserExist = await USER.findOne({email});
+        const isAlreadyUserExist = await USER.findOne({ email });
 
-        if(isAlreadyUserExist) {
-            return res.status(400).json({status:false,message:"User already exist with this email."});
+        if (isAlreadyUserExist) {
+            return res.status(400).json({ status: false, message: "User already exist with this email." });
         }
-        const isAlreadyUserExistWithSRN = await USER.findOne({srn});
+        const isAlreadyUserExistWithSRN = await USER.findOne({ srn });
 
-        if(isAlreadyUserExistWithSRN) {
-            return res.status(400).json({status:false,message:"User already exist with this SRN."});
+        if (isAlreadyUserExistWithSRN) {
+            return res.status(400).json({ status: false, message: "User already exist with this SRN." });
         }
-    
-        
-        const salt = 10;
-        password = await bcrypt.hash(password,salt);
+
+
+
+        password = await bcrypt.hash(password, process.env.SALT_ROUND);
 
         const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
 
-        const createUser = await USER.create({name,srn,email,password,verificationCode});
-        sendVerificationCode(createUser.email,verificationCode);
+        const createUser = await USER.create({ name, srn, email, password, verificationCode });
+        sendVerificationCode(createUser.email, verificationCode);
 
-        return res.status(201).json({status:true,message:"Account created successfully"});
+        return res.status(201).json({ status: true, message: "Account created successfully" });
 
-    } catch(error){
+    } catch (error) {
         console.log(error);
-        return res.status(500).json({status:false,message:"Server error"});
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
 
 
 // updating user
-const updateUserController = async(req,res) => {
+const updateUserController = async (req, res) => {
     const id = req.params.id;
     let updatedData = req.body;
-    if(!updatedData.name || !updatedData.srn || !updatedData.email || !updatedData.password){
-        return res.status(400).json({status:false,message:"All fields are required"});
+    if (!updatedData.name || !updatedData.srn || !updatedData.email || !updatedData.password) {
+        return res.status(400).json({ status: false, message: "All fields are required" });
     }
 
     try {
         const isAlreadyUserExist = await USER.findById(id);
 
-        if(!isAlreadyUserExist) {
-            return res.status(404).json({status:false,message:"No such user found with this email"});
+        if (!isAlreadyUserExist) {
+            return res.status(404).json({ status: false, message: "No such user found with this email" });
         }
-    
-        
-        const salt = 10;
-        updatedData.password = await bcrypt.hash(updatedData.password,salt);
-
-        const updateUser = await USER.findOneAndUpdate({_id:id},updatedData,{returnDocument: "after",runValidators: true});
-
-        return res.status(201).json({status:true,message:"Account Updated successfully",token:generateToken(updateUser._id),userData:updateUser});
 
 
-    } catch(error){
+        updatedData.password = await bcrypt.hash(updatedData.password, SALT_ROUND);
+
+        const updateUser = await USER.findOneAndUpdate({ _id: id }, updatedData, { returnDocument: "after", runValidators: true });
+
+        return res.status(201).json({ status: true, message: "Account Updated successfully", token: generateToken(updateUser._id), userData: updateUser });
+
+
+    } catch (error) {
         console.log(error)
-        return res.status(500).json({status:false,message:"Server error"});
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
 
 
 
-const deleteUserController = async(req,res) => {
-    const id = req.params.id;
-    if(!id) {
-        return res.status(400).json({status:false,message:"Id is not written"});
+const deleteUserController = async (req, res) => {
+    const email = req.params.email;
+    if (!email) {
+        return res.status(400).json({ status: false, message: "Email is not written" });
     }
 
 
-    try{
+    try {
 
-        const deleteUser = await USER.findByIdAndDelete(id);
+        const deleteUser = await USER.findByIdAndDelete({ email: email });
 
-        if(deleteUser){
-        return res.status(200).json({status:true,message:"deleted succussfully"});
+        if (deleteUser) {
+            return res.status(200).json({ status: true, message: "deleted succussfully" });
         }
-        return res.status(404).json({status:false,message:"Account Not Found"});
-    }catch(error) {
-        return res.status(500).json({status:false,message:"Server error"});
+        return res.status(404).json({ status: false, message: "Account Not Found" });
+    } catch (error) {
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
 
 
 
-const verifyController = async(req,res) => {
-    const {email,otpCode} = req.body;
-    
-    
-    try{
-        
-    if(!otpCode) {
-        await USER.findOneAndDelete({email});
-        return res.status(400).json({status:false,message:"opt is empty., Register again"}); 
-    }
+const verifyController = async (req, res) => {
+    const { email, otpCode } = req.body;
 
-        const user = await USER.findOne({verificationCode:otpCode}).select("+isVerified");
 
-        if(!user){
-            await USER.findOneAndDelete({email});
-            return res.status(400).json({status:false,message:"Wrong OPT, Register again"}); 
+    try {
+
+        if (!otpCode) {
+            await USER.findOneAndDelete({ email });
+            return res.status(400).json({ status: false, message: "opt is empty., Register again" });
         }
 
-        user.isVerified=true;
-        user.verificationCode=undefined;
-        welcomeEmailMessage(email,user.name);
-        return res.status(201).json({status:true,message:"Account Verified successfully",token:generateToken(user._id),userData:user});
-    } catch(error) {
+        const user = await USER.findOne({ verificationCode: otpCode }).select("+isVerified");
+
+        if (!user) {
+            await USER.findOneAndDelete({ email });
+            return res.status(400).json({ status: false, message: "Wrong OPT, Register again" });
+        }
+
+        user.isVerified = true;
+        user.verificationCode = undefined;
+        await user.save();
+        welcomeEmailMessage(email, user.name);
+        return res.status(201).json({ status: true, message: "Account Verified successfully", token: generateToken(user._id), userData: user });
+    } catch (error) {
         console.log(error);
-        return res.status(500).json({status:false,message:"Server error"});
+        return res.status(500).json({ status: false, message: "Server error" });
     }
 }
 
@@ -189,9 +192,9 @@ module.exports = {
 
     loginController,
 
-    creatingUserController, 
+    creatingUserController,
 
-    updateUserController, 
+    updateUserController,
 
     deleteUserController,
 
