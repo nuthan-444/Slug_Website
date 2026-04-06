@@ -53,7 +53,7 @@ const registrationForEventController = async (req, res) => {
 
 
     if (!user_id) {
-        return res.status(400), json({ status: false, message: "All fields are require" });
+        return res.status(400), json({ status: false, message: "User id is not provided" });
     }
 
     try {
