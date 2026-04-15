@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./style/VerifyAccount.css";
-import OTPInput from "./OtpInput";
+import OTPInput from "./OTPInput";
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useContextAPI } from "../context/contextAPI";
