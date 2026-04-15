@@ -110,11 +110,11 @@ const Header = () => {
           :
           <div className='login-signup-btn-div'>
             <div onClick={() => setProfileShow(!profileShow)}>
-              { token ?
+              {token ?
                 <img className='tux-pfp' src={TuxPfp} alt="pfp" />
-                :<></>
+                : <></>
               }
-                </div>
+            </div>
             <button className='login-signup-button' onClick={() => logoutHandler()}>Logout</button>
           </div>
 
@@ -150,14 +150,18 @@ const Header = () => {
               Events
             </NavLink>
 
-
-            <NavLink
-              to="/admin"
-              className={({ isActive }) => isActive ? "header-a active" : "header-a"}
-            >
-              Admin
-            </NavLink>
-
+            {token ?
+              (userData.role === "user") ?
+                <></> :
+                <NavLink
+                  to="/admin"
+                  className={({ isActive }) => isActive ? "header-a active" : "header-a"}
+                >
+                  Admin
+                </NavLink>
+              :
+              <></>
+            }
 
 
             <NavLink

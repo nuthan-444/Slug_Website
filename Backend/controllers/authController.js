@@ -12,9 +12,8 @@ const getUserDataController = async (req, res) => {
     if (!_id) {
         return res.status(400).json({ status: false, message: "Id is required." });
     }
-    if (req.user.id !== req.params.id) {
+    if (req.user._id !== req.params.id) {
         return res.status(403).json({ status: false, message: "Insufficient permissions" });
-
     }
     try {
         const userData = await USER.findById(_id);
@@ -82,7 +81,7 @@ const creatingUserController = async (req, res) => {
 
 
 
-        password = await bcrypt.hash(password, process.env.SALT_ROUND);
+        password = await bcrypt.hash(password, Number(process.env.SALT_ROUND));
 
         const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
 
@@ -115,7 +114,7 @@ const updateUserController = async (req, res) => {
         }
 
 
-        updatedData.password = await bcrypt.hash(updatedData.password, SALT_ROUND);
+        updatedData.password = await bcrypt.hash(updatedData.password, Number(process.env.SALT_ROUND));
 
         const updateUser = await USER.findOneAndUpdate({ _id: id }, updatedData, { returnDocument: "after", runValidators: true });
 
