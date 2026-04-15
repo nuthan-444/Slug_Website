@@ -1,0 +1,58 @@
+/* Whole page spacing */
+.event-section {
+  /* width: 100%; */
+  height: fit-content;
+  padding: 40px 60px;
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+
+#event-heading {
+  font-family: outfit;
+  margin-left: 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .event-section {
+    padding: 30px 40px;
+    gap: 25px;
+  }
+
+  #event-heading {
+    margin-left: 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .event-section {
+    padding: 70px 20px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+
+  #event-heading {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .event-section {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .event-section {
+    column-count: 1;
+  }
+}
