@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import "./style/OtpInput.css";
+import "./style/OTPInput.css";
 
 const OTPInput = ({ length = 6, onComplete }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
