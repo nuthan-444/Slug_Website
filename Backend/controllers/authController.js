@@ -86,7 +86,7 @@ const creatingUserController = async (req, res) => {
         const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
 
         const createUser = await USER.create({ name, srn, email, password, verificationCode });
-        sendVerificationCode(createUser.email, verificationCode);
+        await sendVerificationCode(createUser.email, verificationCode);
 
         return res.status(201).json({ status: true, message: "Account created successfully" });
 
