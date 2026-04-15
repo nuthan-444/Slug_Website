@@ -20,7 +20,7 @@ router.put("/:id",updateUserController);
 
 
 //delete user
-router.delete("/:id",deleteUserController);
+router.delete("/:email",deleteUserController);
 
 
 router.post("/verifyAccount",verifyController)
