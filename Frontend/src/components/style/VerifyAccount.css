@@ -32,15 +32,17 @@
   padding: 12px;
   background: #000000;
   color: white;
-  border: none;
-  border-radius: 20px;
+  border: 2px solid black;
+  border-radius: 0px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .verify-btn:hover {
-  background: #363636;
+  background: #ffffff;
+  border: 2px solid black;
+  color: black;
 }
 
 .resend-text {

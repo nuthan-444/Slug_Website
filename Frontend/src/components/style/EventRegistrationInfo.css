@@ -40,7 +40,7 @@ td {
 
 .event-id {
     margin-left: 10px;
-}   
+}
 
 
 .parti-title {
@@ -78,6 +78,7 @@ td {
         margin-left: 0px;
         margin-top: 50px;
         width: 100%;
+        padding-bottom: 70px;
     }
 
     .parti-list-data {

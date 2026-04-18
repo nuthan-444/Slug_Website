@@ -1,224 +1,181 @@
+/* ===== HEADER BASE ===== */
 header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 60px;
-    background-color: rgb(255, 255, 255);
+    background-color: #fff;
     color: black;
-    /* border-bottom: 2px solid rgba(0, 0, 0, 0.37); */
+    padding: 0 200px; /* replaces margin-left/right */
+    box-sizing: border-box;
 }
 
+/* ===== LOGO ===== */
 .logo-div {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
-    margin-left: 150px;
-    height: 100%;
+    gap: 6px;
     cursor: pointer;
-    /* border: 2px solid red; */
 }
 
 .logo-div #slug-logo {
-    width: 50px;
-    height: 40px;
+    width: 45px;
+    height: auto;
     filter: saturate(0);
 }
 
 .logo-div #slug-text {
-    letter-spacing: 0px;
     font-size: 16px;
-    margin-left: 5px;
-    font-family: sans-serif;
     font-weight: bold;
 }
 
 .logo-div #club-text {
-    letter-spacing: 0px;
     font-size: 16px;
-    margin-left: 5px;
-    font-family: sans-serif;
-    color: rgba(0, 0, 0, 0.575);
+    color: rgba(0, 0, 0, 0.6);
     font-weight: bold;
 }
 
+/* ===== NAV LINKS ===== */
 .pages-div {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    /* background-color: red; */
-    margin-right: 100px;
-    width: fit-content;
-    height: fit-content;
-    padding: 0px 20px;
-    gap: 10px;
-    color: black;
+    gap: 15px;
 }
-
 
 .header-a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 30px;
-    border-radius: 10px;
+    padding: 6px 12px; /* flexible instead of fixed width */
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 15px;
-    color: rgba(0, 0, 0, 0.336);
-    position: relative;
-    transition: all 0.3s;
-    /* background-color: rgba(227, 244, 255, 0.575); */
-
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    white-space: nowrap;
 }
 
 .header-a:hover {
-    background-color: rgba(155, 166, 173, 0.267);
+    background-color: rgba(155, 166, 173, 0.2);
 }
 
 .header-a.active {
     font-weight: bold;
     color: black;
-    background-color: rgba(155, 166, 173, 0.267)
-        /* text-decoration: underline; */
+    background-color: rgba(155, 166, 173, 0.25);
 }
 
+/* ===== PROFILE ===== */
 .tux-pfp {
-    width: 20px;
-    height: 25px;
-    margin-top: 5px;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 26px;
+    height: 30px;
+    cursor: pointer;
 }
 
 .mobile-pfp {
     display: none;
 }
 
+/* ===== BUTTONS ===== */
 .login-signup-btn-div {
-    font-size: 30px;
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
     gap: 10px;
 }
 
 .login-signup-button {
-    width: 100px;
-    height: 40px;
+    padding: 10px 30px;
     border: 1px solid black;
-    color: black;
-    background-color: white;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: "Spectral";
+    background: white;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: 0.3s;
 }
 
 .login-signup-button:hover {
-    background-color: rgb(0, 0, 0);
+    background: black;
     color: white;
-    border: 1px solid rgb(255, 255, 255);
 }
 
+/* ===== HAMBURGER ===== */
 .bars {
     display: none;
+    align-items: center;
+    gap: 15px;
+    font-size: 24px;
+    cursor: pointer;
 }
 
-@media only screen and (max-width:600px) {
+/* ===== TABLET ===== */
+@media (max-width: 900px) {
     header {
-        width: 100%;
-        height: 70px;
-        background-color: rgb(255, 255, 255);
-        padding: 0px 10px;
-        color: rgb(0, 0, 0);
-        display: flex;
-        z-index: 2;
-        justify-content: space-around;
+        padding: 0 50px;
     }
 
-    .logo-div {
-        display: flex;
-        flex-direction: row;
-        width: fit-content;
-        height: fit-content;
-        margin-left: 0%;
+    .pages-div {
+        gap: 10px;
     }
 
-    .logo-div #slug-logo {
-        width: 50px;
-        height: 40px;
+    .login-signup-button {
+        padding: 5px 10px;
+        font-size: 13px;
     }
+}
 
-    .logo-div #slug-text {
-        letter-spacing: 2px;
-        font-size: 18px;
-        margin-top: 10px;
-        margin-left: 10px;
-        font-family: "Spectral";
-    }
-
-    .logo-div #club-text {
-        letter-spacing: 2px;
-        font-size: 16px;
-        margin-top: 12px;
-        margin-left: 0px;
-        font-family: sans-serif;
-        color: rgba(0, 0, 0, 0.575);
-        font-weight: 100;
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+    header {
+        height: 65px;
+        padding: 0 15px;
     }
 
     .pages-div {
         display: none;
     }
 
-    body .bars {
+    .bars {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-        width: 100%;
-        height: fit-content;
-        /* background-color: red; */
-        font-size: 27px;
     }
 
     .mobile-pfp {
-        margin-left: 150px;
-        display: initial;
+        display: block;
     }
 
+    /* MOBILE NAV */
     .mobile-nav-bar {
         position: absolute;
-        top: 0%;
-        left: 0%;
-        margin-top: 60px;
+        top: 65px;
+        left: 0;
         width: 100%;
-        padding: 20px 0px;
-        transform: translate(-50%, 0%);
-        background-color: rgb(255, 253, 253);
+        background: white;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         gap: 20px;
-        border-bottom: 1px solid rgb(194, 193, 193);
-        z-index: 1;
+        padding: 20px 0;
+        border-bottom: 1px solid #ddd;
+        z-index: 10;
+    }
+
+    .mobile-nav-bar .header-a {
+        width: 80%;
+        justify-content: center;
+        font-size: 16px;
     }
 
     .login-signup-btn-div {
-        display: flex;
         flex-direction: row;
-        gap: 30px;
+        gap: 20px;
     }
 
     .login-signup-button {
+        background: black;
         color: white;
-        background-color: black;
+        border: none;
+        padding: 10px 30px;
     }
 }

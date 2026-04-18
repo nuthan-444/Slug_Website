@@ -16,7 +16,7 @@ const Header = () => {
   gsap.registerPlugin(ScrollTrigger);
   const navigate = useNavigate();
   const [show, setShow,] = useState(false);
-  const { userData, setUserData, token, setToken, showAnimation, setShowAnimation } = useContextAPI();
+  const { userData, setUserData, token, setToken, showAnimation } = useContextAPI();
 
   const [profileShow, setProfileShow] = useState(false);
   const logoutHandler = () => {
@@ -29,8 +29,8 @@ const Header = () => {
 
 
 
-  // logo-animation
   useGSAP(() => {
+    if (!showAnimation) return
     gsap.from(".logo-div", {
       y: -100,
       opacity: 0,
@@ -39,7 +39,7 @@ const Header = () => {
     });
   }, []);
 
-  // route-animation
+
   useGSAP(() => {
     gsap.from(".pages-div", {
       y: -100,
@@ -137,7 +137,7 @@ const Header = () => {
 
 
 
-      {/* mobile */}
+      {/* mobile nav bar */}
       <div className='bars'>
         <img className='tux-pfp mobile-pfp' src={TuxPfp} alt="pfp" onClick={() => {
           setProfileShow(prev => !prev);

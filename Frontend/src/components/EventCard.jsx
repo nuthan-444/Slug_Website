@@ -35,7 +35,11 @@ const EventCard = ({ event }) => {
 
 
   const MoreDetailedCard = () => {
-    navigate(`/events/${_id}`);
+    if (token) {
+      navigate(`/events/${_id}`);
+    } else {
+      navigate('/login');
+    }
   }
 
 
@@ -53,9 +57,9 @@ const EventCard = ({ event }) => {
         <div className="event-card-content">
           <h3>{eventTitle}</h3>
 
-          <pre className="event-description">
+          <p className="event-description">
             {eventShortDescription}
-          </pre>
+          </p>
 
           <div className="event-info">
             <span>🖥 {eventCategory}</span>
@@ -75,7 +79,7 @@ const EventCard = ({ event }) => {
 
             <div className="register-delete-update-event-btns">
 
-              <button title="See More Info" className="join-btn" onClick={MoreDetailedCard}>See More Info</button>
+              <button title="See More Info" className="join-btn-see-more" onClick={MoreDetailedCard}>See More Info</button>
             </div>
 
 

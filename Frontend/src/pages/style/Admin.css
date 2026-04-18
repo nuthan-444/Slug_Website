@@ -1,77 +1,113 @@
+/* LAYOUT */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
 .admin-routes-outer {
-    display: flex;
-    flex-direction: row;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    width: 300px;
-    height: 700px;
+  width: 220px;
+  background: #ffffff;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ROUTES */
 .admin-route {
-    margin-top: 20px;
-    padding: 10px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* ITEM */
 .each-route-in-admin-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    padding: 0px 20px;
-    border-radius: 50px;
-    width: fit-content;
-    /* border-top: 2px solid rgb(231, 230, 230);
-    border-bottom: 2px solid rgb(231, 230, 230); */
-    margin-bottom: 1px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #bbb;
+  transition: 0.3s all ease;
 }
 
+/* ACTIVE */
+.each-route-in-admin-div.active {
+  background: white;
+  color: black;
+  font-weight: 600;
+}
+
+/* HOVER */
 .each-route-in-admin-div:hover {
-    /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.432); */
+  background: rgba(255,255,255,0.1);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
 }
 
-.admin-routes-outer-mobile {
-    display: none;
+/* ICON */
+.each-route-in-admin-div i {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
 }
 
-@media only screen and (max-width:600px) {
-    .admin-routes-outer {
-        display: none;
-    }
+/* ICON COLORS */
+.icon-add {
+  background: #22c55e;
+  color: black;
+}
 
-    .admin-routes-outer-mobile {
-        display: flex;
-        flex-direction: column;
+.icon-list {
+  background: #facc15;
+  color: black;
+}
 
-    }
+/* CONTENT */
+.admin-content {
+  flex: 1;
+  padding: 30px;
+}
 
-    .admin-route {
-        padding: 0px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-    }
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 768px) {
 
-    .each-route-in-admin-div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: fit-content;
-        height: fit-content;
-        padding: 0px 0px;
-        border-radius: 50px;
-        width: fit-content;
-        /* border-top: 2px solid rgb(231, 230, 230);
-    border-bottom: 2px solid rgb(231, 230, 230); */
-        margin-bottom: 1px;
-        cursor: pointer;
-    }
+  .admin-layout {
+    flex-direction: column;
+    min-height: 10vh;
+  }
 
-    .each-route-in-admin-div:hover {
-        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.432);
-    }
+  /* Sidebar becomes top nav */
+  .admin-routes-outer {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .admin-route {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .each-route-in-admin-div {
+    flex-direction: column;
+    font-size: 12px;
+  }
+
+  .each-route-in-admin-div span {
+    font-size: 11px;
+  }
+
+  .each-route-in-admin-div i {
+    width: 40px;
+    height: 40px;
+  }
+
+  .admin-content {
+    padding: 15px;
+  }
 }

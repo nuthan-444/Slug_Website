@@ -1,246 +1,152 @@
+/* ===== HERO SECTION ===== */
 .hero-section {
     width: 100%;
-    height: 800px;
-    margin-bottom: 100px;
+    min-height: 90vh; /* replaces fixed height */
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: black;
-    /* border-bottom: 2px solid grey; */
-
+    padding: 40px 20px;
+    box-sizing: border-box;
 }
 
+/* ===== INNER ===== */
 .hero-section-inside {
-    width: fit-content;
-    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: black;
-}
-
-.welcome-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* border: 2px solid red; */
-    width: fit-content;
-    height: fit-content;
-}
-
-
-.hero-section-text {
-    font-family: var(--main-font);
-    font-weight: 500;
-    letter-spacing: -5px;
-    font-size: 100px;
-}
-
-.hero-section-sub-text {
-    display: flex;
-    justify-content: center;
+    gap: 20px;
     text-align: center;
-    font-size: 35px;
-    color: rgba(0, 0, 0, 0.473);
 }
 
-
+/* ===== LOGO ===== */
 .logo-div-hero-section {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
-    height: fit-content;
-}
-
-#slug-logo-hero-section {
-    width: 70px;
-    height: 60px;
-    filter: saturate(0);
-}
-
-.logo-div-hero-section #slug-text-hero-section {
-    letter-spacing: 0px;
-    font-size: 16px;
-    margin-left: 5px;
-    font-family: sans-serif;
-    font-weight: bold;
-}
-
-.logo-div-hero-section #club-text-hero-section {
-    letter-spacing: 0px;
-    font-size: 16px;
-    margin-left: 5px;
-    font-family: sans-serif;
-    color: rgba(0, 0, 0, 0.575);
-    font-weight: bold;
-}
-
-.join-us-btn {
-    width: 150px;
-    height: 40px;
-    background-color: black;
-    border: none;
-    color: white;
-    font-weight: bold;
-    transition: all 0.3s;
+    gap: 6px;
     cursor: pointer;
 }
 
-.join-us-btn:hover {
-    background-color: rgba(255, 255, 255, 0.829);
+#slug-logo-hero-section {
+    width: 60px;
+    height: auto;
+    filter: saturate(0);
+}
+
+#slug-text-hero-section {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#club-text-hero-section {
+    font-size: 16px;
+    color: rgba(0,0,0,0.6);
+    font-weight: bold;
+}
+
+/* ===== TEXT ===== */
+.hero-section-text {
+    font-family: var(--main-font);
+    font-weight: 500;
+    letter-spacing: -2px;
+    font-size: clamp(36px, 8vw, 90px); /* 🔥 responsive magic */
+    line-height: 1.1;
+}
+
+.hero-section-sub-text {
+    font-size: clamp(14px, 2vw, 28px);
+    color: rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+/* ===== BUTTONS ===== */
+.btns-hero-section {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.join-us-btn,
+.explore-us-btn {
+    padding: 10px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
     border: 1px solid black;
+}
+
+.join-us-btn {
+    background: black;
+    color: white;
+}
+
+.join-us-btn:hover {
+    background: white;
     color: black;
 }
 
 .explore-us-btn {
-    width: 150px;
-    height: 40px;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid black;
+    background: white;
     color: black;
-    font-weight: bold;
-    transition: all 0.3s;
-    cursor: pointer;
 }
 
 .explore-us-btn:hover {
-    background-color: rgb(0, 0, 0);
+    background: black;
     color: white;
 }
 
-.btns-hero-section {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+.hero-section-sub-text {
+    font-size: clamp(14px, 2vw, 28px);
+    color: rgba(0, 0, 0, 0.5);
+    
+    max-width: 700px;   /* controls line width */
+    margin: 0 auto;     /* centers block */
+    text-align: center; /* centers text inside */
+
+    line-height: 1.6;
 }
 
-
-
-@media only screen and (max-width:600px) {
-
+/* ===== TABLET ===== */
+@media (max-width: 900px) {
     .hero-section {
-        width: 100%;
-        height: 750px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: black;
-        /* border-bottom: 2px solid grey; */
-
-    }
-
-    .hero-section-inside {
-        position: relative;
-        top: -10%;
-        width: fit-content;
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: black;
-    }
-
-    .welcome-div {
-        margin-top: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: fit-content;
-        height: fit-content;
-    }
-
-
-    .hero-section-text {
-        letter-spacing: 0px;
-        font-size: 27px;
+        padding: 30px 15px;
     }
 
     .hero-section-sub-text {
-        margin-top: 10px;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        font-size: 12px;
-        color: rgba(0, 0, 0, 0.473);
+        max-width: 600px;
+    }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+    .hero-section {
+        min-height: 85vh;
     }
 
-    .logo-div-hero-section {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: fit-content;
-        height: fit-content;
-        margin-top: 100px;
-        height: fit-content;
-        cursor: pointer;
-        /* border: 2px solid red; */
+    .hero-section-text {
+        letter-spacing: -1px;
     }
 
-    #slug-logo-hero-section {
-        width: 40px;
-        height: 35px;
-    }
-
-    .logo-div-hero-section #slug-text-hero-section {
-        letter-spacing: 0px;
-        font-size: 13px;
-        margin-left: 5px;
-        font-family: sans-serif;
-        font-weight: bold;
-    }
-
-    .logo-div-hero-section #club-text-hero-section {
-        letter-spacing: 0px;
-        font-size: 13px;
-        margin-left: 5px;
-        font-family: sans-serif;
-        color: rgba(0, 0, 0, 0.575);
-        font-weight: bold;
-    }
-
-    .join-us-btn {
-        width: 150px;
-        height: 40px;
-        background-color: black;
-        border: none;
-        color: white;
-        font-weight: bold;
-        transition: all 0.3s;
-        cursor: pointer;
-    }
-
-    .join-us-btn:hover {
-        border-radius: 10px;
-    }
-
-    .explore-us-btn {
-        width: 150px;
-        height: 40px;
-        background-color: rgb(255, 255, 255);
-        border: 1px solid black;
-        color: black;
-        font-weight: bold;
-        transition: all 0.3s;
-        cursor: pointer;
-    }
-
-    .explore-us-btn:hover {
-        border-radius: 10px;
+    .hero-section-sub-text {
+        font-size: 14px;
     }
 
     .btns-hero-section {
-        margin-top: 50px;
-        display: flex;
         flex-direction: column;
-        gap: 10px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .join-us-btn,
+    .explore-us-btn {
+        width: 80%;
+        max-width: 250px;
+    }
+
+    #slug-logo-hero-section {
+        width: 45px;
     }
 }

@@ -9,32 +9,33 @@ import { useContextAPI } from "../context/contextAPI";
 const VerifyAccount = () => {
 
   const [otpValue, setOtpValue] = useState("");
-  const {userData,setUserData,token,setToken,email,setEmail} = useContextAPI();
+  const { userData, setUserData, token, setToken, email, setEmail } = useContextAPI();
+  const [popupMessage, setPopupMessage] = useState("");
 
   const navigate = useNavigate();
 
 
 
-  const handleVerify = async() => {
+  const handleVerify = async () => {
     if (otpValue.length !== 6) {
-      alert("Please enter complete OTP");
+      setPopupMessage("Please enter complete OTP");
       return;
     }
 
 
     const otpCode = Number(otpValue);
-    try{
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/verifyAccount`,{email,otpCode});
-        if(response.data.status){
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/verifyAccount`, { email, otpCode });
+      if (response.data.status) {
         navigate("/");
         setUserData(response.data.userData);
         setToken(response.data.token);
         setEmail(undefined);
-        }
-    }catch(error) {
-        navigate("/signup");
-        console.log(error);
-        alert(error.response?.data?.message || "Client error");
+      }
+    } catch (error) {
+      navigate("/signup");
+      console.log(error);
+      setPopupMessage(error.response?.data?.message || "Client error");
     }
   };
 

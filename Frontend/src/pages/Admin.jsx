@@ -12,68 +12,50 @@ const Admin = () => {
     //                                 backgroundColor:"#00FF00",display:"flex",justifyContent:"center",alignItems:"center"}}
 
     return (
-        <>
-        
-        { userData.role !== "user" ? 
-        <>
-            <div className='admin-routes-outer'>
-                <div className='admin-outer-div'>
-                    <div className='admin-route'>
-                        <NavLink
-                            to="/admin/eventform"
-                            className={({ isActive }) => isActive ? "header-a active each-route-in-admin-div" : "header-a each-route-in-admin-div"}
-                            style={{ fontSize: "15px" }}
-                        >
-                            <i className="fa-solid fa-plus" style={{
-                                width: "20px", height: "20px", borderRadius: "50%", marginRight: "10px",
-                                backgroundColor: "#00FF00", display: "flex", justifyContent: "center", alignItems: "center"
-                            }}></i> Add Event
-                        </NavLink>
-                        <NavLink
-                            to="/admin/eventRegisterationInfo"
-                            className={({ isActive }) => isActive ? "header-a active each-route-in-admin-div" : "header-a each-route-in-admin-div"}
-                            style={{ fontSize: "15px" }}
-                        >
-                            <i className="fa-solid fa-clipboard-list" style={{
-                                width: "20px", height: "20px", borderRadius: "50%", marginRight: "10px",
-                                backgroundColor: "#eeff02", color: "black", display: "flex", justifyContent: "center", alignItems: "center"
-                            }}></i>   Event Registation Info
-                        </NavLink>
-                    </div>
-                </div>
-            </div>
+  <>
+    {userData?.role !== "user" && (
+      <div className="admin-layout">
 
-        {/* for mobile */}
-            <div className='admin-routes-outer-mobile'>
-                <div className='admin-outer-div'>
-                    <div className='admin-route'>
-                        <NavLink
-                            to="/admin/eventform"
-                            className={({ isActive }) => isActive ? "header-a active each-route-in-admin-div" : "header-a each-route-in-admin-div"}
-                            style={{ fontSize: "15px" }}
-                        >
-                            <i className="fa-solid fa-plus" style={{
-                                width: "50px", height: "50px", borderRadius: "50%", marginRight: "0px",
-                                backgroundColor: "#00FF00", display: "flex", justifyContent: "center", alignItems: "center"
-                            }}></i>
-                        </NavLink>
-                        <NavLink
-                            to="/admin/eventRegisterationInfo"
-                            className={({ isActive }) => isActive ? "header-a active each-route-in-admin-div" : "header-a each-route-in-admin-div"}
-                            style={{ fontSize: "15px" }}
-                        >
-                            <i className="fa-solid fa-clipboard-list" style={{
-                                width: "50px", height: "50px", borderRadius: "50%",
-                                backgroundColor: "#eeff02", color: "black", display: "flex", justifyContent: "center", alignItems: "center"
-                            }}></i>
-                        </NavLink>
-                    </div>
-                </div>
-            </div></>
-: <></>
-}
-        </>
-    )
+        {/* Sidebar */}
+        <div className="admin-routes-outer">
+          <div className="admin-route">
+
+            <NavLink
+              to="/admin/eventform"
+              className={({ isActive }) =>
+                isActive
+                  ? "each-route-in-admin-div active"
+                  : "each-route-in-admin-div"
+              }
+            >
+              <i className="fa-solid fa-plus icon-add"></i>
+              <span>Add Event</span>
+            </NavLink>
+
+            <NavLink
+              to="/admin/eventRegisterationInfo"
+              className={({ isActive }) =>
+                isActive
+                  ? "each-route-in-admin-div active"
+                  : "each-route-in-admin-div"
+              }
+            >
+              <i className="fa-solid fa-clipboard-list icon-list"></i>
+              <span>Registration Info</span>
+            </NavLink>
+
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className="admin-content">
+          {/* your nested routes will render here */}
+        </div>
+
+      </div>
+    )}
+  </>
+);
 }
 
 export default Admin

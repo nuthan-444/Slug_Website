@@ -97,11 +97,11 @@ gsap.registerPlugin(ScrollTrigger);
   return (
     <>
       <div id='about-section'>
-        <div className='slug-fullform-text'>Sapthagiri Libre-Software Users Group is our student<br /> community dedicated to Free and Open Source Software.</div>
+        <div className='slug-fullform-text'>Sapthagiri Libre-Software Users Group is our student community dedicated to Free and Open Source Software.</div>
         <div className='about-slug'>
           <div className='inside-about-slug'>
             <p style={{ fontWeight: "600", fontSize: "40px" }}>About Slug</p>
-            <p>Sapthagiri Libre-Software Users Group is a student-driven community focused on learning, <br /> building, and contributing to the world of Free and Open Source Software.
+            <p>Sapthagiri Libre-Software Users Group is a student-driven community focused on learning, building, and contributing to the world of Free and Open Source Software.
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora corrupti sit fugit exercitationem dolores odit officiis, incidunt delectus laudantium maiores. Cupiditate commodi soluta ipsum illo perferendis est rem labore facere.
             </p>
           </div>
@@ -111,7 +111,7 @@ gsap.registerPlugin(ScrollTrigger);
         <div className='about-GNU'>
           <div className='inside-about-GNU'>
             <p style={{ fontWeight: "600", fontSize: "40px" }}>About GNU</p>
-            <p>GNU is a foundational project in the Free Software movement, developing essential tools<br />and software that power many open systems, including GNU/Linux.</p>
+            <p>GNU is a foundational project in the Free Software movement, developing essential tools and software that power many open systems, including GNU/Linux.</p>
           </div>
           <div className='GNU-img-div'><img src={GNULogo} alt="GNU" /></div>
         </div>
