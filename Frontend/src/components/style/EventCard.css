@@ -1,6 +1,6 @@
 /* ===== CARD ===== */
 .event-card {
-  width: 100%;
+  width: 380px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
