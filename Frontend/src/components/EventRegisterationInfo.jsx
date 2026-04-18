@@ -5,11 +5,15 @@ import './style/EventRegistrationInfo.css'
 import { useState } from 'react'
 import axios from 'axios'
 import { useContextAPI } from '../context/contextAPI'
+import Popup from "./Popup";
+
 
 const EventRegisterationInfo = () => {
   const { token } = useContextAPI();
   const [partiLists, setPartiLists] = useState([]);
   const [eventIDValue, setEventIDValue] = useState("");
+  const [popupMessage, setPopupMessage] = useState("");
+
 
   const getParticipants = async () => {
     try {
@@ -24,13 +28,13 @@ const EventRegisterationInfo = () => {
 
       if (response.data.status) {
         setPartiLists(response.data.eventParticipantsData.registrationList);
-        alert(response.data.message);
+        setPopupMessage(response.data.message);
         return;
       }
 
-      alert(response.data.message);
+      setPopupMessage(response.data.message);
     } catch (error) {
-      alert(error.response?.data?.message || "Client error");
+      setPopupMessage(error.response?.data?.message || "Client error");
       console.log(error);
     }
   };
@@ -107,7 +111,7 @@ const EventRegisterationInfo = () => {
                 {partiLists.length > 0 ? (
                   partiLists.map((singleParti, idx) => (
                     <tr key={idx}>
-                      <td>{idx+1}</td>
+                      <td>{idx + 1}</td>
                       <td>{singleParti.srn}</td>
                       <td>{singleParti.name}</td>
                       <td>{singleParti.email}</td>
@@ -122,6 +126,13 @@ const EventRegisterationInfo = () => {
             </table>
           </div>
         </div>
+        {popupMessage && (
+          <Popup
+            message={popupMessage}
+            type="success"
+            onClose={() => setPopupMessage("")}
+          />
+        )}
       </div>
     </>
   )

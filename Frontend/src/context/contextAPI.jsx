@@ -58,6 +58,16 @@ useEffect(() => {
 
 
 
+    const [showAnimation,setShowAnimation] = useState(() => {
+        let getData = JSON.parse(sessionStorage.getItem("showAnimation"));
+        return getData ? getData :  true;
+    })
+
+useEffect(() => {
+    sessionStorage.setItem("showAnimation",JSON.stringify(true));
+},[showAnimation]);
+
+
 
 return (
     <ContextAPI.Provider value={
@@ -65,7 +75,8 @@ return (
             email,setEmail,
             userData,setUserData,
             token,setToken,
-            allEvents,setAllEvents
+            allEvents,setAllEvents,
+            showAnimation,setShowAnimation
         }
     }>
         {children}

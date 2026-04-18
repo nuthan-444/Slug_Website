@@ -70,7 +70,7 @@
 .event-form button {
   padding: 12px;
   background: #000000;
-  border: none;
+  border: 2px solid black;
   color: #fffcfc;
   font-weight: bold;
   cursor: pointer;

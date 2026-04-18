@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style/Header.css'
 import slugLogo from '/SlugLogo.png'
 import { NavLink, useNavigate } from "react-router-dom"
@@ -16,7 +16,7 @@ const Header = () => {
   gsap.registerPlugin(ScrollTrigger);
   const navigate = useNavigate();
   const [show, setShow,] = useState(false);
-  const { userData, setUserData, token, setToken } = useContextAPI();
+  const { userData, setUserData, token, setToken, showAnimation, setShowAnimation } = useContextAPI();
 
   const [profileShow, setProfileShow] = useState(false);
   const logoutHandler = () => {
@@ -26,6 +26,7 @@ const Header = () => {
       setToken(null);
     }
   }
+
 
 
   // logo-animation
@@ -57,6 +58,11 @@ const Header = () => {
       duration: 1,
     });
   }, []);
+
+
+
+
+
 
   return (
 
@@ -128,9 +134,21 @@ const Header = () => {
       </div>
 
 
+
+
+
+      {/* mobile */}
       <div className='bars'>
-        <img className='tux-pfp mobile-pfp' src={TuxPfp} alt="pfp" onClick={() => setProfileShow(prev => !prev)} />
-        <motion.i onClick={() => setShow(prev => !prev)}
+        <img className='tux-pfp mobile-pfp' src={TuxPfp} alt="pfp" onClick={() => {
+          setProfileShow(prev => !prev);
+          setShow(false)
+        }} />
+
+
+        <motion.i onClick={() => {
+          setShow(prev => !prev);
+          setProfileShow(false);
+        }}
           initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 1, delay: 1.5 }} className="fa-solid fa-bars"></motion.i>
         {show ?
           <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, delay: 0 }}
@@ -138,6 +156,7 @@ const Header = () => {
             <NavLink
               to="/"
               className={({ isActive }) => isActive ? "header-a active" : "header-a"}
+              onClick={() => setShow(false)}
             >
               Home
             </NavLink>
@@ -146,6 +165,7 @@ const Header = () => {
             <NavLink
               to="/events"
               className={({ isActive }) => isActive ? "header-a active" : "header-a"}
+              onClick={() => setShow(false)}
             >
               Events
             </NavLink>
@@ -156,6 +176,8 @@ const Header = () => {
                 <NavLink
                   to="/admin"
                   className={({ isActive }) => isActive ? "header-a active" : "header-a"}
+                  onClick={() => setShow(false)}
+
                 >
                   Admin
                 </NavLink>
@@ -167,19 +189,25 @@ const Header = () => {
             <NavLink
               to="/gallery"
               className={({ isActive }) => isActive ? "header-a active" : "header-a"}
+              onClick={() => setShow(false)}
             >
               Gallery
             </NavLink>
 
 
             {!token ?
-              <div className='login-signup-btn-div'>
+              
+              <div className='login-signup-btn-div' onClick={() => setShow(false)}>
                 <button className='login-signup-button' onClick={() => navigate("/login")}>Login</button>/
                 <button className='login-signup-button' onClick={() => navigate("/signup")}>Signup</button>
+                
               </div>
               :
               <div className='login-signup-btn-div'>
-                <button className='login-signup-button' onClick={() => logoutHandler()}>Logout</button>
+                <button className='login-signup-button' onClick={() => {
+                  logoutHandler();
+                  setShow(false);
+                }}>Logout</button>
               </div>
             }
           </motion.div>
