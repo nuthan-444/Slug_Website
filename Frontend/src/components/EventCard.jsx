@@ -71,11 +71,10 @@ const EventCard = ({ event }) => {
               {new Date(eventRegEndDate).toLocaleDateString()}
             </span>
           </div>
-          <div className="event-dates">
+          {/* <div className="event-dates">
             Event Added by <span style={{ fontWeight: "bold" }}>{event.eventCreatedBy.name}</span>
-          </div>
+          </div> */}
           <div className="event-footer">
-
 
             <div className="register-delete-update-event-btns">
 

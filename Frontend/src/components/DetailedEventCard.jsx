@@ -160,6 +160,8 @@ const DetailedEventCard = () => {
             eventTitle: event.eventTitle || "",
             eventDescription: event.eventDescription || "",
             eventCategory: event.eventCategory || "",
+            eventRegStartDate: event.eventRegStartDate?.slice(0, 10),
+            eventRegEndDate: event.eventRegEndDate?.slice(0, 10),
             eventStartDate: event.eventStartDate?.slice(0, 10),
             eventEndDate: event.eventEndDate?.slice(0, 10),
             eventMaxParticipants: event.eventMaxParticipants || "",
@@ -234,6 +236,8 @@ const DetailedEventCard = () => {
 
     return (
         <>
+
+        {/* Event Details */}
             <div className="single-event-div">
                 <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0 }} className="eventDetailed-card">
                     <div className="IMG-DIV">{eventImage ? (
@@ -248,90 +252,90 @@ const DetailedEventCard = () => {
                     )}</div>
 
 
-                        <div className="eventDetailed-card-content">
-                            <h2>{eventTitle}</h2>
+                    <div className="eventDetailed-card-content">
+                        <h2>{eventTitle}</h2>
 
-                            <p className="eventDetailed-description">
-                                {eventDescription}
-                            </p>
+                        <p className="eventDetailed-description">
+                            {eventDescription}
+                        </p>
 
-                            <div className="eventDetailed-info">
-                                <span>📍 {eventLocation}</span>
-                                <span>{event.eventCategory}</span>
-                                <span>🖥 {eventMode}</span>
-                            </div>
+                        <div className="eventDetailed-info">
+                            <span>📍 {eventLocation}</span>
+                            <span>{event.eventCategory}</span>
+                            <span>🖥 {eventMode}</span>
+                        </div>
 
-                            <div className="eventDetailed-dates">
-                                <span> Registration :&nbsp;
-                                    {new Date(eventRegStartDate).toLocaleDateString()} |&nbsp;
-                                    {new Date(eventRegEndDate).toLocaleDateString()}
-                                </span>
-                            </div>
+                        <div className="eventDetailed-dates">
+                            <span> Registration :&nbsp;
+                                {new Date(eventRegStartDate).toLocaleDateString()} |&nbsp;
+                                {new Date(eventRegEndDate).toLocaleDateString()}
+                            </span>
+                        </div>
 
-                            <div className="eventDetailed-dates">
-                                <span> Event :&nbsp;
-                                    {new Date(eventStartDate).toLocaleDateString()} |&nbsp;
-                                    {new Date(eventEndDate).toLocaleDateString()}
-                                </span>
-                            </div>
-                            <div className="eventDetailed-dates">
-                                Event Added by <span style={{ fontWeight: "bold" }}>{eventCreatedBy.name}</span>
-                            </div>
-                            <div className="eventDetailed-footer">
-                                <span>
-                                    {eventMaxParticipants > 0
-                                        ? `👥 ${totalRegistration}/${eventMaxParticipants}`
-                                        : "👥 No limit"}
-                                </span>
-
-
+                        <div className="eventDetailed-dates">
+                            <span> Event :&nbsp;
+                                {new Date(eventStartDate).toLocaleDateString()} |&nbsp;
+                                {new Date(eventEndDate).toLocaleDateString()}
+                            </span>
+                        </div>
+                        {/* <div className="eventDetailed-dates">
+                            Event Added by <span style={{ fontWeight: "bold" }}>{eventCreatedBy.name}</span>
+                        </div> */}
+                        <div className="eventDetailed-footer">
+                            <span>
+                                {eventMaxParticipants > 0
+                                    ? `👥 ${totalRegistration}/${eventMaxParticipants}`
+                                    : "👥 No limit"}
+                            </span>
 
 
-                                {isUserRegistered ? (
-                                    <div className="register-delete-update-event-btns">
-                                        {userData?.role === "user" ?
-                                            <></> : <>
+
+
+                            {isUserRegistered ? (
+                                <div className="register-delete-update-event-btns">
+                                    {userData?.role === "user" ?
+                                        <></> : <>
+                                            <div className="deleteEventDetailed" title="copy event id" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => copyEventId()}><i className="fa-regular fa-copy"></i></div>
+                                            <div className="deleteEventDetailed" title="update" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => updateEvent()}><i className="fa-regular fa-pen-to-square"></i></div>
+                                            <div className="deleteEventDetailed" title="delete" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => deleteEvent()}><i className="fa-solid fa-trash"></i></div>
+                                        </>
+                                    }
+                                    <button title={isEventStarted ? "Can't Cancel now" : "Cancel now"} className="join-btn" onClick={() => handleRegister("cancel")} disabled={isEventStarted}
+                                        style={{
+                                            backgroundColor: isEventStarted ? "#ccc" : "#000",
+                                            color: isEventStarted ? "#666" : "#fff",
+                                            cursor: isEventStarted ? "not-allowed" : "pointer",
+                                            opacity: isEventStarted ? 0.6 : 1,
+                                            borderRadius: 0
+                                        }}
+                                    >Cancel</button>
+                                </div>
+                            ) : (
+                                <div className="register-delete-update-event-btns">
+                                    {userData?.role === "user" ?
+                                        <></> : <>
+                                            {token ? <>
                                                 <div className="deleteEventDetailed" title="copy event id" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => copyEventId()}><i className="fa-regular fa-copy"></i></div>
                                                 <div className="deleteEventDetailed" title="update" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => updateEvent()}><i className="fa-regular fa-pen-to-square"></i></div>
                                                 <div className="deleteEventDetailed" title="delete" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => deleteEvent()}><i className="fa-solid fa-trash"></i></div>
                                             </>
-                                        }
-                                        <button title={isEventStarted ? "Can't Cancel now" : "Cancel now"} className="join-btn" onClick={() => handleRegister("cancel")} disabled={isEventStarted}
-                                            style={{
-                                                backgroundColor: isEventStarted ? "#ccc" : "#000",
-                                                color: isEventStarted ? "#666" : "#fff",
-                                                cursor: isEventStarted ? "not-allowed" : "pointer",
-                                                opacity: isEventStarted ? 0.6 : 1,
-                                                borderRadius: 0
-                                            }}
-                                        >Cancel</button>
-                                    </div>
-                                ) : (
-                                    <div className="register-delete-update-event-btns">
-                                        {userData?.role === "user" ?
-                                            <></> : <>
-                                                {token ? <>
-                                                    <div className="deleteEventDetailed" title="copy event id" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => copyEventId()}><i className="fa-regular fa-copy"></i></div>
-                                                    <div className="deleteEventDetailed" title="update" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => updateEvent()}><i className="fa-regular fa-pen-to-square"></i></div>
-                                                    <div className="deleteEventDetailed" title="delete" style={{ backgroundColor: "#000000", color: "white" }} onClick={() => deleteEvent()}><i className="fa-solid fa-trash"></i></div>
-                                                </>
-                                                    : <></>}
-                                            </>
-                                        }
-                                        <button title={isEventStarted ? "Can't Register now" : "Register"} className="join-btn" onClick={() => handleRegister("register")} disabled={isEventStarted}
-                                            style={{
-                                                backgroundColor: isEventStarted ? "#ccc" : "#000",
-                                                color: isEventStarted ? "#666" : "#fff",
-                                                cursor: isEventStarted ? "not-allowed" : "pointer",
-                                                opacity: isEventStarted ? 0.6 : 1,
-                                                borderRadius: 0
-                                            }}
-                                        >Register</button>
-                                    </div>
-                                )}
+                                                : <></>}
+                                        </>
+                                    }
+                                    <button title={isEventStarted ? "Can't Register now" : "Register"} className="join-btn" onClick={() => handleRegister("register")} disabled={isEventStarted}
+                                        style={{
+                                            backgroundColor: isEventStarted ? "#ccc" : "#000",
+                                            color: isEventStarted ? "#666" : "#fff",
+                                            cursor: isEventStarted ? "not-allowed" : "pointer",
+                                            opacity: isEventStarted ? 0.6 : 1,
+                                            borderRadius: 0
+                                        }}
+                                    >Register</button>
+                                </div>
+                            )}
 
-                            </div>
                         </div>
+                    </div>
                 </motion.div>
 
                 {showLoading ?
@@ -347,6 +351,15 @@ const DetailedEventCard = () => {
                 )}
 
 
+
+
+
+
+
+
+
+
+            {/* Editing the Event Details  */}
                 {isEditing && (
                     <div className="edit-popup">
 
@@ -390,7 +403,23 @@ const DetailedEventCard = () => {
                                 <option value="Work shop">Work shop</option>
                             </select>
 
-                            <p>Start Date:</p>
+                            <p>Registration Start Date:</p>
+                            <input
+                                type="date"
+                                name="eventRegStartDate"
+                                value={editData.eventRegStartDate}
+                                onChange={handleEditChange}
+                            />
+
+                            <p>Registration End Date:</p>
+                            <input
+                                type="date"
+                                name="eventRegEndDate"
+                                value={editData.eventRegEndDate}
+                                onChange={handleEditChange}
+                            />
+
+                            <p>Event Start Date:</p>
                             <input
                                 type="date"
                                 name="eventStartDate"
@@ -398,7 +427,7 @@ const DetailedEventCard = () => {
                                 onChange={handleEditChange}
                             />
 
-                            <p>End Date:</p>
+                            <p>Event End Date:</p>
                             <input
                                 type="date"
                                 name="eventEndDate"

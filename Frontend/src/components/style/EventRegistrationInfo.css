@@ -25,7 +25,7 @@ td {
     padding: 0.6rem;
     background: black;
     color: white;
-    border: none;
+    border: 0.5px solid black;
     border-radius: 0px;
     cursor: pointer;
     font-family: var(--secondary-font);
@@ -55,7 +55,7 @@ td {
     margin-left: 10px;
     background: #000000;
     color: white;
-    border: none;
+    border: 0.5px solid black;
     padding: 0.6rem;
     font-family: var(--secondary-font);
     transition: all 0.3s;

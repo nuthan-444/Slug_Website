@@ -30,7 +30,7 @@ const Header = () => {
 
 
   useGSAP(() => {
-    if (!showAnimation) return
+    if (!showAnimation) return;
     gsap.from(".logo-div", {
       y: -100,
       opacity: 0,
@@ -41,6 +41,7 @@ const Header = () => {
 
 
   useGSAP(() => {
+    if (!showAnimation) return;
     gsap.from(".pages-div", {
       y: -100,
       opacity: 0,
@@ -51,6 +52,7 @@ const Header = () => {
 
 
   useGSAP(() => {
+    if (!showAnimation) return;
     gsap.from(".tux-pfp", {
       y: -100,
       opacity: 0,
@@ -196,11 +198,11 @@ const Header = () => {
 
 
             {!token ?
-              
+
               <div className='login-signup-btn-div' onClick={() => setShow(false)}>
                 <button className='login-signup-button' onClick={() => navigate("/login")}>Login</button>/
                 <button className='login-signup-button' onClick={() => navigate("/signup")}>Signup</button>
-                
+
               </div>
               :
               <div className='login-signup-btn-div'>
@@ -215,10 +217,6 @@ const Header = () => {
           : <></>
         }
       </div>
-      {token && profileShow ?
-        <ProfileCard name={userData.name} email={userData.email} srn={userData.srn} />
-        : <></>
-      }
     </header>
 
 

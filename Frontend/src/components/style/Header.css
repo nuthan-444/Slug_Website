@@ -7,7 +7,8 @@ header {
     height: 60px;
     background-color: #fff;
     color: black;
-    padding: 0 200px; /* replaces margin-left/right */
+    padding: 0 200px;
+    /* replaces margin-left/right */
     box-sizing: border-box;
 }
 
@@ -47,7 +48,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px 12px; /* flexible instead of fixed width */
+    padding: 6px 12px;
+    /* flexible instead of fixed width */
     border-radius: 8px;
     text-decoration: none;
     font-size: 14px;
