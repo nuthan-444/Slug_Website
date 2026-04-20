@@ -58,9 +58,9 @@ const addHackthonController = async (req, res) => {
 }
 
 
-const updateHackathonController = async(req,res) => {
+// const updateHackathonController = async(req,res) => {
   
-}
+// }
 
 module.exports = {
   addHackthonController,
