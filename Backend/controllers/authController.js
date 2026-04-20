@@ -2,17 +2,18 @@ const USER = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../util/JWT.Token');
 const { sendVerificationCode, welcomeEmailMessage } = require('../middleware/email');
-
+const mongoose = require('mongoose');
 
 
 
 // getting user controllers
 const getUserDataController = async (req, res) => {
-    const _id = req.params._id;
+    const {_id} = req.params;
+console.log()
     if (!_id) {
         return res.status(400).json({ status: false, message: "Id is required." });
     }
-    if (req.user._id !== req.params.id) {
+    if (req.user._id.toString() !== _id) {
         return res.status(403).json({ status: false, message: "Insufficient permissions" });
     }
     try {
@@ -21,7 +22,7 @@ const getUserDataController = async (req, res) => {
             return res.status(404).json({ status: false, message: "User Not Found" });
         }
 
-        return res.status(200).json({ status: true, message: "User found", userData: UserData });
+        return res.status(200).json({ status: true, message: "User found", userData: userData });
     } catch (error) {
         return res.status(500).json({ status: false, message: "Server error" });
     }
