@@ -14,6 +14,10 @@ const gallerySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  pdfUrl: {
+    type: String,
+    required: true,
+  },
   uploadedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
