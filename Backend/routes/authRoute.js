@@ -1,10 +1,11 @@
 const express = require("express");
 const { getUserDataController, loginController, creatingUserController, updateUserController, deleteUserController, verifyController} = require("../controllers/authController");
+const { verifyToken } = require("../util/JWT.Token");
 const router = express.Router();
 
 
 // Get user data for profile
-router.get("/:_id",getUserDataController);
+router.get("/:_id",verifyToken,getUserDataController);
 
 
 // login router
