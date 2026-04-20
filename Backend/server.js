@@ -15,6 +15,8 @@ connectDB();
 const authRouter = require('./routes/authRoute');
 const eventRouter = require('./routes/eventRoute');
 const hackathonRouter = require('./routes/hackathonRoute');
+const galleryRouter = require('./routes/galleryRoute');
+
 
 // home page
 app.get("/" , (req,res) => {
@@ -32,8 +34,14 @@ app.use("/api/auth",authRouter);
 app.use("/api/events",eventRouter);
 
 
+
+// hackathon page route
 app.use("/api/hackathon",hackathonRouter)
 
+
+
+//Gallery page route
+app.use("/api/gallery",galleryRouter);
 
 app.listen(PORT , () => {
     console.log(`Server is listening on Port ${PORT}`);
