@@ -11,7 +11,6 @@ const Home = () => {
   return (
     <div className='Home' >
 
-
       <HeroSection />
       <About />
       <Contact />

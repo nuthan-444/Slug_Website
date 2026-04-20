@@ -145,7 +145,10 @@ const Header = () => {
           setProfileShow(prev => !prev);
           setShow(false)
         }} />
-
+        {token && profileShow ?
+          <ProfileCard name={userData.name} email={userData.email} srn={userData.srn} />
+          : <></>
+        }
 
         <motion.i onClick={() => {
           setShow(prev => !prev);

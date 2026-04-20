@@ -1,0 +1,77 @@
+.gallery-form-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.gallery-form {
+  margin-top: 100px;
+  margin-left: 25vw;
+  width: 100%;
+  max-width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-form h2 {
+  text-align: center;
+}
+
+.gallery-form input,
+.gallery-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.gallery-form textarea {
+  resize: none;
+  height: 80px;
+}
+
+.gallery-form button {
+  padding: 10px;
+  border: 1px solid black;
+  background: #000000;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.gallery-form button:hover {
+  background: #ffffff;
+  color: black;
+  border: 1px solid black;
+}
+
+.form-message {
+  text-align: center;
+  font-size: 14px;
+}
+
+
+@media only screen and (max-width:600px) {
+  .gallery-form-container {
+    flex-direction: column;
+  }
+  .gallery-form {
+  margin-left: 1vw;
+  margin-top: 0px;
+  width: 100%;
+  max-width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+}

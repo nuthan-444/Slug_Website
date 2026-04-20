@@ -15,6 +15,7 @@ import EventRegisterationInfo from './components/EventRegisterationInfo'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import DetailedEventCard from './components/DetailedEventCard'
+import GalleryForm from './components/GalleryForm'
 
 const App = () => {
 
@@ -47,6 +48,7 @@ const App = () => {
               <Route path='/admin/eventRegisterationInfo' element={<EventRegisterationInfo />} />
               <Route path='/admin/eventform' element={<EventForm />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path='/admin/galleryForm' element={<GalleryForm />} />
               <Route path='/gallery' element={<Gallery />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />

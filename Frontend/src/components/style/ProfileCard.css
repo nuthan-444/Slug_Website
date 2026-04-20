@@ -38,23 +38,24 @@
 }
 
 
-@media only screen and (max-width:600px){
+@media only screen and (max-width:600px) {
     .profile-card {
-    position: absolute;
-    top: 10%;
-    left: 30%;
-    right: 0%;
-    width: 260px;
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    z-index: 3;
-    font-family: var(--secondary-font);
-}
+        display: initial;
+        position: absolute;
+        top: 100%;
+        /* right: 200px; */
+        left: 30%;
+        width: 260px;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        z-index:9999;
+        font-family: var(--secondary-font);
+    }
 }

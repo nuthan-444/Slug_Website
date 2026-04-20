@@ -4,6 +4,7 @@
 }
 
 .event-form-container {
+  margin-top: 20px;
   background: #ffffff;
   color: #000000;
   padding: 50px 20px;
@@ -90,6 +91,7 @@
   }
 
   .event-form-container {
+    margin-top: 0px;
     background: #ffffff;
     color: #000000;
     padding: 20px 20px;

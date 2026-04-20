@@ -6,13 +6,14 @@ import { useContextAPI } from '../context/contextAPI'
 import './style/Event.css'
 import Loading from '../components/Loading'
 import { useNavigate } from 'react-router-dom'
-
+import Popup from "../components/Popup";
 
 const Events = () => {
   const navigate = useNavigate()
   const { allEvents, setAllEvents } = useContextAPI();
 
   const [showLoading, setShowLoading] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
 
 
   const getAllEvents = async () => {
@@ -30,7 +31,8 @@ const Events = () => {
 
       }
     } catch (error) {
-      alert(error.response?.data?.message);
+      setShowLoading(false);
+      setPopupMessage(error.response?.data?.message);
     }
   }
 
@@ -48,7 +50,15 @@ const Events = () => {
             {allEvents.length > 0 ? [...allEvents].reverse().map((event, idx) => (
               <EventCard key={idx} event={event} />
             ))
-              : <></>
+              : <>
+                {popupMessage && (
+                  <Popup
+                    message={popupMessage}
+                    type="success"
+                    onClose={() => setPopupMessage("")}
+                  />
+                )}
+              </>
             }
           </div>
         </> : <Loading />
