@@ -84,6 +84,7 @@ const Gallery = () => {
 
 
   return (
+    <center>
     <div className="gallery-wrapper">
       {popupMessage && (
         <Popup
@@ -122,7 +123,7 @@ const Gallery = () => {
         </div>
       ))
         : <></>}
-    </div>
+    </div></center>
   );
 };
 
