@@ -63,7 +63,7 @@ export const ContextProvider = ({ children }) => {
                 userData, setUserData,
                 token, setToken,
                 allEvents, setAllEvents,
-                showAnimation, setShowAnimation
+                showAnimation, setShowAnimation,
             }
         }>
             {children}

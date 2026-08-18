@@ -13,7 +13,7 @@ const DetailedEventCard = () => {
 
     const navigate = useNavigate();
     const { eventID } = useParams();
-    const { token, userData } = useContextAPI();
+    const { token, setToken, userData, setUserData, logoutHandler } = useContextAPI();
     const [showLoading, setShowLoading] = useState(false);
 
 
@@ -31,11 +31,11 @@ const DetailedEventCard = () => {
                     Authorization: `Bearer ${token}`,
                 },
             })
+            console.table("try :\n",response)
             if (response.data.status) {
                 if (!response.data.eventData.getEvent) {
                     navigate("/");
                     setPopupMessage(response.data.message || "Client error");
-
                 } else {
                     setEvent(response.data.eventData.getEvent);
                     setIsUserRegistered(response.data.eventData.isUserRegistered);
@@ -45,11 +45,19 @@ const DetailedEventCard = () => {
 
             }
         } catch (error) {
-            setShowLoading(false);
             console.log(error)
-            navigate("/events")
-            setPopupMessage(response.data.message || "Client error");
-
+            if (error.response.data.message === "Token expired ! Please Login Again" || error.response.data.message === "Invalid token" ||
+                 error.response.data.message === "User not found" || error.response.data.message === "No token provided") {
+                setShowLoading(false);
+                navigate("/");
+                setUserData(null);
+                setToken(null);
+                navigate("/login")
+                return;
+            }
+            setShowLoading(false);
+            navigate("/events");
+            setPopupMessage(error.response.data.message || "Client error");
         }
     }
 
@@ -57,19 +65,20 @@ const DetailedEventCard = () => {
         getEventDetails();
     }, [eventID])
 
-    const _id = event?._id || ""
+    const _id = event?._id || "updated soon"
     const eventImage = event?.eventImage
-    const eventTitle = event?.eventTitle || ""
-    const eventDescription = event?.eventDescription || ""
-    const eventCategory = event?.eventCategory || ""
-    const eventStartDate = event?.eventStartDate || ""
-    const eventEndDate = event?.eventEndDate || ""
+    const eventTitle = event?.eventTitle || "updated soon"
+    const eventDescription = event?.eventDescription || "updated soon"
+    const eventCategory = event?.eventCategory || "updated soon"
+    const eventStartDate = event?.eventStartDate || "updated soon"
+    const eventEndDate = event?.eventEndDate || "updated soon"
     const eventRegStartDate = event?.eventRegStartDate || ""
     const eventRegEndDate = event?.eventRegEndDate || ""
-    const eventLocation = event?.eventLocation || ""
+    const eventLocation = event?.eventLocation || "updated soon"
     const eventCreatedBy = event?.eventCreatedBy || ""
-    const eventMaxParticipants = event?.eventMaxParticipants || ""
-    const eventMode = event?.eventMode
+    const eventMaxParticipants = event?.eventMaxParticipants || "updated soon"
+    const eventMode = event?.eventMode || "updated soon"
+    const eventChatRoom = event?.eventChatRoom || "updated soon"
 
 
 
@@ -237,7 +246,7 @@ const DetailedEventCard = () => {
     return (
         <>
 
-        {/* Event Details */}
+            {/* Event Details */}
             <div className="single-event-div">
                 <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.3, delay: 0 }} className="eventDetailed-card">
                     <div className="IMG-DIV">{eventImage ? (
@@ -359,7 +368,7 @@ const DetailedEventCard = () => {
 
 
 
-            {/* Editing the Event Details  */}
+                {/* Editing the Event Details  */}
                 {isEditing && (
                     <div className="edit-popup">
 
